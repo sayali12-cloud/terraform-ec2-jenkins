@@ -9,6 +9,12 @@ pipeline {
 
     stages {
 
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Terraform Init') {
             steps {
                 sh 'terraform init'
@@ -27,11 +33,27 @@ pipeline {
             }
         }
 
+        stage('Approval') {
+            steps {
+                input message: 'Do you want to apply Terraform changes?'
+            }
+        }
+
         stage('Terraform Apply') {
             steps {
                 sh 'terraform apply -auto-approve'
             }
         }
     }
+
+    post {
+        success {
+            echo 'Terraform deployment completed successfully 🚀'
+        }
+        failure {
+            echo 'Terraform deployment failed ❌'
+        }
+    }
 }
+
 
