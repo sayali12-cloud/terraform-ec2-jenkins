@@ -7,7 +7,7 @@ pipeline {
         AWS_DEFAULT_REGION    = 'ap-south-1'
     }
 
-   
+    stages {
 
         stage('Terraform Init') {
             steps {
@@ -32,5 +32,6 @@ pipeline {
                 sh 'terraform apply -auto-approve'
             }
         }
-    
+    }
 }
+
