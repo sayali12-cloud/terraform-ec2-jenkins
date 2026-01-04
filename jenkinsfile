@@ -7,13 +7,7 @@ pipeline {
         AWS_DEFAULT_REGION    = 'ap-south-1'
     }
 
-    stages {
-        stage('Checkout Code') {
-            steps {
-                git branch: 'master',
-                    url: 'https://github.com/sayali12-cloud/terraform-ec2-jenkins.git'
-            }
-        }
+   
 
         stage('Terraform Init') {
             steps {
@@ -38,5 +32,5 @@ pipeline {
                 sh 'terraform apply -auto-approve'
             }
         }
-    }
+    
 }
